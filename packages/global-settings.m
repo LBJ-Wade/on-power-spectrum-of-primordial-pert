@@ -29,3 +29,6 @@ phiN = 20;
 
 kMax = 5;
 kMin = 0.00005;
+
+
+bunchDavisVacuumEpochFactor = 100;
