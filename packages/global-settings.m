@@ -1,5 +1,9 @@
 (* ::Package:: *)
 
+(* ::Text:: *)
+(*The pivot scale (wave number):*)
+
+
 kN = 0.05;
 
 
@@ -19,5 +23,9 @@ phiN = 20;
 (*On solving the background e.o.m.:*)
 
 
-tauMin = -5000000;
-tauMax = -1;
+(* ::Text:: *)
+(*The observable window:*)
+
+
+kMax = 5;
+kMin = 0.00005;

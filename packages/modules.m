@@ -1,7 +1,24 @@
 (* ::Package:: *)
 
+ClearAll[tauMin, tauMax, HI, solutionOfPhi, z, f, epsilon, eta, xi, powerSpectrumAtHorizonCrossingEpoch, kOfY, lnPs];
+
+
+ClearAll[v, tau, phi];
+
+
 (* ::Text:: *)
-(*The Background Part:*)
+(** The Background Part:*)
+
+
+(* ::Text:: *)
+(*The horizon crossing time of the boundary values of the observable window,*)
+
+
+tauMin = -1/kMin 100;
+tauMax = -1/kMax;
+(* or, a little wilder: *)
+tauMin = -1/kMin 100 (1+0.1);
+tauMax = -1/kMax (1-0.1);
 
 
 (* ::Text:: *)
@@ -11,14 +28,14 @@
 HI[tau_] := Sqrt[V[phi[tau]]/3];
 
 
-solutionOfPhi = NDSolve[{phi'[tau] == 1/tau V'[phi[tau]]/V[phi[tau]], phi[-1/kN] == phiN}, phi, {tau,tauMin,tauMax}];
+solutionOfPhi = NDSolve[{phi'[tau] == 1/tau V'[phi[tau]]/V[phi[tau]], phi[-1/kN] == phiN}, phi, {tau, tauMin, tauMax}];
 
 
 z[tau_] := Evaluate[1/HI[tau] 1/tau V'[phi[tau]]/V[phi[tau]]/.solutionOfPhi];
 
 
 (* ::Text:: *)
-(*The Perturbation Part:*)
+(** The Perturbation Part:*)
 
 
 (* ::Text:: *)
@@ -39,9 +56,6 @@ f[phi_] := Evaluate[Simplify[2+10 epsilon[phi]^2+epsilon[phi] (5-9 eta[phi])-3 e
 epsilon[phi_] := 1/2 (V'[phi]/V[phi]);
 eta[phi_] := V''[phi]/V[phi];
 xi[phi_] := V'[phi]/V[phi] V'''[phi]/V[phi];
-
-
-ClearAll[v, tau, phi];
 
 
 u[tau_] := v[tau]/z[tau];
