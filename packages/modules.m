@@ -14,10 +14,10 @@ ClearAll[v, tau, phi];
 (*The horizon crossing time of the boundary values of the observable window,*)
 
 
-tauMin = -1/kMin 100;
+tauMin = -1/kMin bunchDavisVacuumEpochFactor;
 tauMax = -1/kMax;
 (* or, a little wilder: *)
-tauMin = -1/kMin 100 (1+0.1);
+tauMin = -1/kMin bunchDavisVacuumEpochFactor (1+0.1);
 tauMax = -1/kMax (1-0.1);
 
 
@@ -70,7 +70,7 @@ Module[{tauK, tauI, solutionOfMukharnovEqu, powerSpectrumAtHorizonCrossingEpochO
 	(* the time of horizon-crossing epoch of this k-mode: *)
 	tauK = -1/k;
 	(* the time of epoch of establishing the Bunch-Davis vacuum: *)
-	tauI = 100*tauK;
+	tauI = bunchDavisVacuumEpochFactor*tauK;
 	(* numerically solve the Mukharnov equation: *)
 	solutionOfMukharnovEqu = NDSolve[{v''[tau] + (k^2 - 1/tau^2 f[Evaluate[phi[tau]/.solutionOfPhi]]) v[tau] == 0, v[tauI] == 1/Sqrt[2k] Exp[-I k tauI], v'[tauI] == (-I k)/Sqrt[2k] Exp[-I k tauI]}, v, {tau, tauI, tauK}];
 	(* thus the power spectrum at horizon-crossing epoch of this k-mode: *)
